@@ -129,7 +129,7 @@ const HighwayAssistance = () => {
               type="submit"
               label="Request Assistance"
               icon="pi pi-check"
-              className="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition duration-300"
+              className=" bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition duration-300"
             />
           </div>
         </form>

@@ -75,7 +75,7 @@ const ItineraryPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-100 p-6 flex flex-col items-center">
+    <div className="min-h-screen bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200 p-6 flex flex-col items-center">
       <Card className="w-full max-w-3xl mb-6 shadow-lg bg-white">
         <div className="p-4 text-left space-y-2">
           <h1 className="text-2xl font-bold text-gray-800">Trip Summary</h1>

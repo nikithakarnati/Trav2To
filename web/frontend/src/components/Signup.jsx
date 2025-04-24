@@ -1,178 +1,10 @@
-// import React, { useState } from "react";
-// import { InputText } from "primereact/inputtext";
-// import { Button } from "primereact/button";
-// import { motion } from "framer-motion";
-// import "primereact/resources/themes/lara-light-blue/theme.css";
-// import "primereact/resources/primereact.min.css";
-// import "primeicons/primeicons.css";
-
-// function Signup() {
-//   const [name, setName] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [phone, setPhone] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [confirmPassword, setConfirmPassword] = useState("");
-//   const [error, setError] = useState({
-//     name: false,
-//     email: false,
-//     phone: false,
-//     password: false,
-//     confirmPassword: false,
-//   });
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     setError({
-//       name: false,
-//       email: false,
-//       phone: false,
-//       password: false,
-//       confirmPassword: false,
-//     });
-
-//     if (!name || !email || !phone || !password || !confirmPassword) {
-//       setError({
-//         name: !name,
-//         email: !email,
-//         phone: !phone,
-//         password: !password,
-//         confirmPassword: !confirmPassword,
-//       });
-//       return;
-//     }
-
-//     if (password !== confirmPassword) {
-//       setError((prev) => ({ ...prev, confirmPassword: true }));
-//       return;
-//     }
-
-//     const userDetails = { name, email, phone, password };
-//     console.log(userDetails);
-//   };
-
-//   return (
-//     <div className="relative flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200 overflow-hidden p-5">
-//       {/* Animated Background Circles */}
-//       <motion.div
-//         animate={{ x: [0, 80, 0], y: [0, 40, 0], opacity: [0.3, 0.6, 0.3] }}
-//         transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-//         className="absolute w-32 h-32 md:w-64 md:h-64 bg-blue-200 rounded-full opacity-30 top-5 left-5 md:top-10 md:left-10 blur-2xl"
-//       />
-//       <motion.div
-//         animate={{ x: [-80, 50, -80], y: [-40, 0, -40], opacity: [0.3, 0.6, 0.3] }}
-//         transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-//         className="absolute w-36 h-36 md:w-72 md:h-72 bg-pink-100 rounded-full opacity-30 bottom-5 right-5 md:bottom-10 md:right-10 blur-2xl"
-//       />
-
-//       {/* Signup Card */}
-//       <motion.div
-//         initial={{ opacity: 0, scale: 0.95 }}
-//         animate={{ opacity: 1, scale: 1 }}
-//         transition={{ duration: 0.5, ease: "easeOut" }}
-//         whileHover={{ scale: 1.03, boxShadow: "0px 10px 25px rgba(0, 0, 0, 0.1)" }}
-//         className="p-6 md:p-8 bg-white shadow-lg rounded-2xl w-full max-w-[400px] lg:max-w-[480px] backdrop-blur-lg bg-opacity-90"
-//       >
-//         <h2 className="text-2xl font-bold text-center mb-5 text-gray-700">Sign Up</h2>
-//         <form onSubmit={handleSubmit} className="space-y-4">
-//           {/* Name Field */}
-//           <div>
-//             <label className="block text-sm font-medium text-gray-600">Full Name</label>
-//             <InputText
-//               type="text"
-//               placeholder="Enter your name"
-//               value={name}
-//               onChange={(e) => setName(e.target.value)}
-//               className={w-full p-2 border rounded-lg ${
-//                 error.name ? "border-red-400" : "border-gray-300"
-//               }}
-//             />
-//             {error.name && <p className="text-red-400 text-xs mt-1">Enter a valid name</p>}
-//           </div>
-
-//           {/* Email Field */}
-//           <div>
-//             <label className="block text-sm font-medium text-gray-600">Email</label>
-//             <InputText
-//               type="email"
-//               placeholder="Enter your email"
-//               value={email}
-//               onChange={(e) => setEmail(e.target.value)}
-//               className={w-full p-2 border rounded-lg ${
-//                 error.email ? "border-red-400" : "border-gray-300"
-//               }}
-//             />
-//             {error.email && <p className="text-red-400 text-xs mt-1">Enter a valid email</p>}
-//           </div>
-
-//           {/* Phone Field */}
-//           <div>
-//             <label className="block text-sm font-medium text-gray-600">Phone Number</label>
-//             <InputText
-//               type="tel"
-//               placeholder="Enter your phone number"
-//               value={phone}
-//               maxLength={10}
-//               onChange={(e) => setPhone(e.target.value)}
-//               onInput={(e) => (e.target.value = e.target.value.replace(/\D/g, ""))}
-//               className={w-full p-2 border rounded-lg ${
-//                 error.phone ? "border-red-400" : "border-gray-300"
-//               }}
-//             />
-//             {error.phone && <p className="text-red-400 text-xs mt-1">Enter a valid phone number</p>}
-//           </div>
-
-//           {/* New Password Field */}
-//           <div>
-//             <label className="block text-sm font-medium text-gray-600">New Password</label>
-//             <InputText
-//               type="password"
-//               placeholder="Enter a new password"
-//               value={password}
-//               onChange={(e) => setPassword(e.target.value)}
-//               className={w-full p-2 border rounded-lg ${
-//                 error.password ? "border-red-400" : "border-gray-300"
-//               }}
-//             />
-//             {error.password && <p className="text-red-400 text-xs mt-1">Enter a valid password</p>}
-//           </div>
-
-//           {/* Confirm Password Field */}
-//           <div>
-//             <label className="block text-sm font-medium text-gray-600">Confirm Password</label>
-//             <InputText
-//               type="password"
-//               placeholder="Confirm your password"
-//               value={confirmPassword}
-//               onChange={(e) => setConfirmPassword(e.target.value)}
-//               className={w-full p-2 border rounded-lg ${
-//                 error.confirmPassword ? "border-red-400" : "border-gray-300"
-//               }}
-//             />
-//             {error.confirmPassword && <p className="text-red-400 text-xs mt-1">Passwords do not match</p>}
-//           </div>
-
-//           {/* Submit Button */}
-//           <div>
-//             <Button
-//               label="Sign Up"
-//               type="submit"
-//               className="w-full p-3 text-lg p-button-primary transition-transform transform hover:scale-105 rounded-lg"
-//             />
-//           </div>
-//         </form>
-//       </motion.div>
-//     </div>
-//   );
-// }
-
-// export default Signup;
-
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+
 import "primereact/resources/themes/lara-light-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -182,55 +14,20 @@ function Signup() {
     register,
     handleSubmit,
     watch,
-    reset,
     formState: { errors },
   } = useForm();
 
-  const [successMessage, setSuccessMessage] = useState("");
-  const [apiError, setApiError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const onSubmit = async (data) => {
-    setApiError("");
-    setSuccessMessage("");
-
-    const userDetails = {
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      password: data.password,
-    };
-
-    try {
-      setLoading(true);
-      const response = await fetch("http://localhost:5000/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userDetails),
-      });
-
-      const resData = await response.json();
-
-      if (response.ok) {
-        setSuccessMessage("Signup successful! Please log in.");
-        reset();
-      } else {
-        setApiError(resData.message || "Something went wrong.");
-      }
-    } catch (err) {
-      console.error("Signup error:", err);
-      setApiError("Server error. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
+  const onSubmit = () => {
+    
   };
 
   const password = watch("password");
 
   return (
     <div className="relative flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200 overflow-hidden p-5">
+      {/* Animated Background Circles */}
       <motion.div
         animate={{ x: [0, 80, 0], y: [0, 40, 0], opacity: [0.3, 0.6, 0.3] }}
         transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
@@ -242,105 +39,121 @@ function Signup() {
         className="absolute w-36 h-36 md:w-72 md:h-72 bg-pink-100 rounded-full opacity-30 bottom-5 right-5 md:bottom-10 md:right-10 blur-2xl"
       />
 
+      {/* Signup Card */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        whileHover={{ scale: 1.03, boxShadow: "0px 10px 25px rgba(0, 0, 0, 0.1)" }}
+        whileHover={{ scale: 1.03 }}
         className="p-6 md:p-8 bg-white shadow-lg rounded-2xl w-full max-w-[400px] lg:max-w-[480px] backdrop-blur-lg bg-opacity-90"
       >
         <h2 className="text-2xl font-bold text-center mb-5 text-gray-700">Sign Up</h2>
-
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {/* Full Name */}
           <div>
             <label className="block text-sm font-medium text-gray-600">Full Name</label>
             <InputText
               type="text"
-              {...register("name", { required: "Please enter your name" })}
-              className={`w-full p-2 border rounded-lg ${errors.name ? "border-red-400" : "border-gray-300"}`}
               placeholder="Enter your name"
+              {...register("name", { required: true })}
+              className={`w-full p-2 border rounded-lg ${
+                errors.name ? "border-red-400" : "border-gray-300"
+              }`}
             />
-            {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name.message}</p>}
+            {errors.name && <p className="text-red-400 text-xs mt-1">Enter a valid name</p>}
           </div>
 
+          {/* Email */}
           <div>
             <label className="block text-sm font-medium text-gray-600">Email</label>
             <InputText
               type="email"
-              {...register("email", {
-                required: "Please enter a valid email",
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Invalid email format",
-                },
-              })}
-              className={`w-full p-2 border rounded-lg ${errors.email ? "border-red-400" : "border-gray-300"}`}
               placeholder="Enter your email"
+              {...register("email", {
+                required: true,
+                pattern: /^\S+@\S+\.\S+$/,
+              })}
+              className={`w-full p-2 border rounded-lg ${
+                errors.email ? "border-red-400" : "border-gray-300"
+              }`}
             />
-            {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>}
+            {errors.email && <p className="text-red-400 text-xs mt-1">Enter a valid email</p>}
           </div>
 
+          {/* Phone */}
           <div>
             <label className="block text-sm font-medium text-gray-600">Phone Number</label>
             <InputText
               type="tel"
               maxLength={10}
               {...register("phone", {
-                required: "Please enter a 10-digit phone number",
-                pattern: {
-                  value: /^\d{10}$/,
-                  message: "Phone number must be 10 digits",
-                },
+                required: true,
+                pattern: /^[0-9]{10}$/,
               })}
-              onInput={(e) => {
-                e.target.value = e.target.value.replace(/\D/g, "");
-              }}
-              className={`w-full p-2 border rounded-lg ${errors.phone ? "border-red-400" : "border-gray-300"}`}
+              onInput={(e) => (e.target.value = e.target.value.replace(/\D/g, ""))}
               placeholder="Enter your phone number"
+              className={`w-full p-2 border rounded-lg ${
+                errors.phone ? "border-red-400" : "border-gray-300"
+              }`}
             />
-            {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone.message}</p>}
+            {errors.phone && <p className="text-red-400 text-xs mt-1">Enter a valid phone number</p>}
           </div>
 
+          {/* Password */}
           <div>
             <label className="block text-sm font-medium text-gray-600">New Password</label>
             <InputText
               type="password"
-              {...register("password", { required: "Please enter a password" })}
-              className={`w-full p-2 border rounded-lg ${errors.password ? "border-red-400" : "border-gray-300"}`}
               placeholder="Enter a new password"
+              {...register("password", { required: true, minLength: 6 })}
+              className={`w-full p-2 border rounded-lg ${
+                errors.password ? "border-red-400" : "border-gray-300"
+              }`}
             />
-            {errors.password && <p className="text-red-400 text-xs mt-1">{errors.password.message}</p>}
+            {errors.password && <p className="text-red-400 text-xs mt-1">Enter a valid password</p>}
           </div>
 
+          {/* Confirm Password */}
           <div>
             <label className="block text-sm font-medium text-gray-600">Confirm Password</label>
             <InputText
               type="password"
-              {...register("confirmPassword", {
-                required: "Please confirm your password",
-                validate: (value) => value === password || "Passwords do not match",
-              })}
-              className={`w-full p-2 border rounded-lg ${errors.confirmPassword ? "border-red-400" : "border-gray-300"}`}
               placeholder="Confirm your password"
+              {...register("confirmPassword", {
+                required: true,
+                validate: (value) => value === password,
+              })}
+              className={`w-full p-2 border rounded-lg ${
+                errors.confirmPassword ? "border-red-400" : "border-gray-300"
+              }`}
             />
-            {errors.confirmPassword && <p className="text-red-400 text-xs mt-1">{errors.confirmPassword.message}</p>}
+            {errors.confirmPassword && (
+              <p className="text-red-400 text-xs mt-1">Passwords do not match</p>
+            )}
           </div>
 
-          {apiError && <p className="text-red-500 text-sm">{apiError}</p>}
-          {successMessage && <p className="text-green-500 text-sm">{successMessage}</p>}
-
+          {/* Submit Button */}
           <div>
             <Button
-              label={loading ? "Submitting..." : "Sign Up"}
+              label="Sign Up"
               type="submit"
-              disabled={loading}
               className="w-full p-3 text-lg p-button-primary transition-transform transform hover:scale-105 rounded-lg"
             />
           </div>
         </form>
+        <div className="text-center mt-4">
+          <span className="text-sm text-gray-600">Already have an Account? </span>
+          <button 
+            onClick={() => navigate('/login')}
+            className="text-sm font-medium text-blue-500 hover:text-blue-700 hover:underline cursor-pointer"
+          >
+            Login here
+          </button>
+        </div>
       </motion.div>
     </div>
   );
 }
 
 export default Signup;
+

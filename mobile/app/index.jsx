@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {
   View,
@@ -11,6 +12,7 @@ import {
 import MapView, { Marker } from "react-native-maps";
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
+import Icon from 'react-native-vector-icons/Feather';
 
 const { width } = Dimensions.get("window");
 
@@ -30,7 +32,7 @@ export default function index() {
   const handleSearch = async () => {
     try {
       const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=AIzaSyD_rVFWoI47iVnEdlU7Cb4QvNPh7o0DZTg`
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=YOUR_API_KEY` // Replace with your actual API key
       );
       const data = await response.json();
       if (data.results.length > 0) {
@@ -52,20 +54,24 @@ export default function index() {
     { name: "Highway Assistance", icon: "🚗", path: "HighwayAssistance" },
     { name: "Hotel Booking", icon: "🏨", path: "HotelBooking" },
     { name: "Car Booking", icon: "🚘", path: "CarBooking" },
-    { name: "Multilingual Support", icon: "🌍", path: "MultilingualSupport" },
+    { name: "Restaurant", icon: "🍱", path: "Restaurant" },
   ];
+
+  const navigateToSidebar = () => {
+    navigation.navigate("SideBar");
+  };
 
   return (
     <ScrollView style={styles.container}>
       {/* Header */}
       <Animatable.View animation={fadeInUp} duration={800} style={styles.header}>
-        <Text style={styles.title}>Tourist Guide</Text>
+        <Text style={styles.title}>Trav2To</Text>
         <View style={styles.authButtons}>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Text style={styles.link}>Login</Text>
-          </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
             <Text style={styles.linkPrimary}>Sign Up</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={navigateToSidebar} style={styles.sidebarButton}>
+            <Icon name="menu" size={30} color="#000" />
           </TouchableOpacity>
         </View>
       </Animatable.View>
@@ -130,15 +136,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#6B21A8",
     marginBottom: 8,
+    alignItems: "left",
   },
   authButtons: {
     flexDirection: "row",
     gap: 16,
+    alignItems: "right",
   },
-  link: {
-    fontSize: 16,
-    color: "#6B21A8",
-    marginRight: 12,
+  sidebarButton: {
+    marginRight: 15,
+    padding: 5,
   },
   linkPrimary: {
     fontSize: 16,
